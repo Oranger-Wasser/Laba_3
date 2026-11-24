@@ -1,17 +1,22 @@
 from pathlib import Path
 
 from csv_reader import CsvAddressReader
+from xml_reader import XmlAddressReader
 
 
 def main():
-    path = Path(__file__).parent / "address.csv"
-    reader = CsvAddressReader()
+    folder = Path(__file__).parent
+    readers = {
+        "address.csv": CsvAddressReader(),
+        "address.xml": XmlAddressReader(),
+    }
 
-    count = 0
-    for _ in reader.read(path):
-        count += 1
+    for filename, reader in readers.items():
+        count = 0
+        for _ in reader.read(folder / filename):
+            count += 1
 
-    print("Прочитано записей:", count)
+        print(filename, "— прочитано записей:", count)
 
 
 if __name__ == "__main__":
