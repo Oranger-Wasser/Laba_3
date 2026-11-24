@@ -1,4 +1,3 @@
-from csv import Error as CsvError
 from pathlib import Path
 from time import perf_counter
 from xml.etree.ElementTree import ParseError
@@ -41,7 +40,7 @@ class ConsoleApp:
                 report = self.calculator.calculate(reader.read(path))
                 elapsed = perf_counter() - start
 
-            except (OSError, ValueError, KeyError, CsvError, ParseError) as error:
+            except (OSError, ValueError, ParseError) as error:
                 print(f"Ошибка обработки файла: {error}")
                 continue
 
